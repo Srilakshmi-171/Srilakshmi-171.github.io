@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Srilakshmi — Data Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+:root{
+  --bg:#07080F;
+  --bg2:#0E0F1A;
+  --bg3:#161724;
+  --border:rgba(255,255,255,0.07);
+  --text:#EEEEFF;
+  --muted:#7878A0;
+  --accent1:#C084FC;
+  --accent2:#F472B6;
+  --accent3:#38BDF8;
+  --accent4:#FB923C;
+  --green:#4ADE80;
+}
+
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6}
+
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:.35;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1rem 3rem;
+  background:rgba(7,8,15,0.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.logo{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;
+  letter-spacing:.04em;
+  background:linear-gradient(120deg,var(--accent1),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.82rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{
+  background:linear-gradient(135deg,var(--accent1),var(--accent2));
+  color:#07080F;font-weight:700;font-size:.8rem;
+  padding:.5rem 1.2rem;border-radius:8px;
+  text-decoration:none;letter-spacing:.04em;text-transform:uppercase;transition:opacity .2s;
+}
+.nav-cta:hover{opacity:.85}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:grid;grid-template-columns:1fr 420px;
+  align-items:center;gap:4rem;
+  padding:8rem 3rem 5rem;
+  max-width:1200px;margin:0 auto;
+  position:relative;
+}
+.hero::before{
+  content:'';position:absolute;top:-100px;left:-200px;
+  width:700px;height:700px;
+  background:radial-gradient(ellipse,rgba(192,132,252,0.1) 0%,transparent 65%);
+  pointer-events:none;
+}
+
+.hero-available{
+  display:inline-flex;align-items:center;gap:.6rem;
+  background:rgba(74,222,128,0.08);
+  border:1px solid rgba(74,222,128,0.2);
+  color:var(--green);font-size:.72rem;font-weight:600;letter-spacing:.08em;
+  padding:.35rem 1rem;border-radius:100px;text-transform:uppercase;
+  margin-bottom:1.5rem;width:fit-content;
+}
+.dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
+.hero-greeting{font-family:'JetBrains Mono',monospace;color:var(--muted);font-size:.85rem;margin-bottom:.6rem}
+.hero-greeting span{color:var(--accent1)}
+
+.hero h1{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(2.2rem,4vw,3.6rem);
+  font-weight:800;line-height:1.1;letter-spacing:-0.03em;margin-bottom:.75rem;
+}
+.hero h1 .line2{
+  background:linear-gradient(120deg,var(--accent1) 0%,var(--accent2) 50%,var(--accent4) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+
+.hero-role{
+  display:flex;align-items:center;gap:1rem;
+  font-family:'Syne',sans-serif;font-size:1rem;
+  font-weight:600;color:var(--muted);margin-bottom:1.25rem;
+}
+.role-bar{width:32px;height:2px;background:linear-gradient(90deg,var(--accent1),var(--accent2))}
+
+.hero-bio{max-width:480px;font-size:.92rem;color:var(--muted);line-height:1.75;margin-bottom:2rem}
+.hero-bio strong{color:var(--text);font-weight:500}
+
+.hero-btns{display:flex;gap:.85rem;flex-wrap:wrap;margin-bottom:3rem}
+.btn-grad{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:linear-gradient(135deg,var(--accent1),var(--accent2));
+  color:#07080F;font-weight:700;font-size:.88rem;
+  padding:.75rem 1.75rem;border-radius:10px;text-decoration:none;
+  transition:transform .2s,opacity .2s;
+}
+.btn-grad:hover{transform:translateY(-2px);opacity:.9}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:transparent;color:var(--text);font-weight:600;font-size:.88rem;
+  padding:.75rem 1.75rem;border-radius:10px;text-decoration:none;
+  border:1px solid var(--border);transition:all .2s;
+}
+.btn-ghost:hover{border-color:rgba(255,255,255,0.2);background:rgba(255,255,255,0.04)}
+
+.hero-metrics{display:flex;gap:2.5rem;flex-wrap:wrap;padding-top:2rem;border-top:1px solid var(--border)}
+.metric-num{
+  font-family:'Syne',sans-serif;font-size:1.9rem;font-weight:800;
+  background:linear-gradient(120deg,var(--accent3),var(--accent1));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;
+}
+.metric-label{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:.25rem}
+
+/* PHOTO CARD */
+.hero-photo-wrap{position:relative;z-index:1}
+.photo-card{
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:24px;overflow:hidden;
+  padding:2rem;
+  position:relative;
+}
+.photo-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(145deg,rgba(192,132,252,0.06),rgba(244,114,182,0.04));
+  pointer-events:none;
+}
+.photo-img-wrap{
+  width:100%;aspect-ratio:1;border-radius:16px;overflow:hidden;
+  background:linear-gradient(135deg,rgba(192,132,252,0.15),rgba(244,114,182,0.1));
+  margin-bottom:1.5rem;position:relative;
+  border:1px solid rgba(192,132,252,0.15);
+}
+/* Replace src with your actual photo */
+.photo-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:top}
+.photo-placeholder{
+  width:100%;height:100%;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:.5rem;
+  font-size:4rem;
+}
+.photo-placeholder p{font-size:.75rem;color:var(--muted);text-align:center;font-family:'JetBrains Mono',monospace}
+
+.photo-name{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;margin-bottom:.2rem}
+.photo-title{font-size:.78rem;color:var(--muted);margin-bottom:1.25rem}
+.photo-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.photo-tag{
+  font-size:.67rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+  padding:.2rem .6rem;border-radius:100px;
+}
+
+/* TRUST BAR */
+.trust-bar{
+  background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:1.5rem 3rem;
+}
+.trust-inner{
+  max-width:1200px;margin:0 auto;
+  display:flex;align-items:center;justify-content:center;gap:3rem;flex-wrap:wrap;
+}
+.trust-item{display:flex;align-items:center;gap:.75rem;font-size:.82rem;color:var(--muted);font-weight:500}
+.trust-icon{font-size:1.1rem}
+.trust-sep{width:1px;height:20px;background:var(--border)}
+
+/* SECTION */
+.section{padding:6rem 3rem;max-width:1200px;margin:0 auto}
+.divider-line{border:none;border-top:1px solid var(--border);margin:0 3rem}
+.eyebrow{
+  font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--accent1);margin-bottom:.75rem;
+}
+.section-h{
+  font-family:'Syne',sans-serif;font-size:clamp(1.7rem,3.5vw,2.5rem);
+  font-weight:800;letter-spacing:-0.02em;line-height:1.15;margin-bottom:.85rem;
+}
+.section-sub{color:var(--muted);font-size:.9rem;max-width:480px;line-height:1.75}
+
+/* SKILLS */
+.skills-wrap{margin-top:3rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.8rem}
+.skill-pill{
+  background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.1rem;
+  transition:border-color .2s,transform .2s;position:relative;overflow:hidden;
+}
+.skill-pill:hover{border-color:rgba(192,132,252,0.3);transform:translateY(-3px)}
+.skill-ic{font-size:1.4rem;margin-bottom:.65rem;display:block}
+.skill-nm{font-weight:600;font-size:.875rem;margin-bottom:.2rem}
+.skill-tg{font-size:.7rem;color:var(--muted)}
+.skill-track{margin-top:.75rem;height:3px;background:rgba(255,255,255,0.06);border-radius:100px}
+.skill-fill{height:3px;border-radius:100px}
+
+/* PROJECTS */
+.projects-grid{margin-top:3rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.25rem}
+.proj-card{
+  background:var(--bg2);border:1px solid var(--border);border-radius:18px;
+  overflow:hidden;display:flex;flex-direction:column;
+  transition:border-color .25s,transform .25s;
+}
+.proj-card:hover{border-color:rgba(192,132,252,0.3);transform:translateY(-4px)}
+
+/* project screenshot area */
+.proj-screenshot{
+  width:100%;height:180px;overflow:hidden;
+  background:linear-gradient(135deg,var(--bg3),var(--bg2));
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.proj-screenshot-placeholder{
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  color:var(--muted);font-size:.75rem;font-family:'JetBrains Mono',monospace;text-align:center;
+}
+.proj-screenshot-placeholder .big{font-size:2.5rem}
+.proj-screenshot img{width:100%;height:100%;object-fit:cover}
+.proj-screenshot-label{
+  position:absolute;bottom:.6rem;right:.6rem;
+  font-size:.62rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  background:rgba(7,8,15,0.8);color:var(--muted);
+  padding:.2rem .5rem;border-radius:6px;
+  border:1px solid var(--border);
+}
+
+.proj-top{padding:1.5rem 1.5rem 0;display:flex;justify-content:space-between;align-items:flex-start}
+.proj-ic{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem}
+.proj-arrow{
+  width:34px;height:34px;border-radius:8px;
+  background:rgba(255,255,255,0.05);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--muted);text-decoration:none;font-size:.95rem;transition:all .2s;
+}
+.proj-arrow:hover{background:rgba(192,132,252,0.12);color:var(--accent1);border-color:rgba(192,132,252,0.3)}
+.proj-body{padding:1rem 1.5rem 1.5rem;flex:1;display:flex;flex-direction:column}
+.proj-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;margin-bottom:.4rem}
+.proj-desc{font-size:.82rem;color:var(--muted);line-height:1.65;flex:1}
+.proj-findings{margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:.35rem}
+.finding{font-size:.76rem;color:var(--muted);display:flex;align-items:flex-start;gap:.45rem}
+.finding::before{content:"▸";color:var(--accent1);flex-shrink:0;font-size:.68rem;margin-top:.18rem}
+.proj-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:1rem}
+.ptag{font-size:.66rem;font-weight:600;letter-spacing:.05em;padding:.2rem .6rem;border-radius:100px;text-transform:uppercase}
+
+/* SERVICES */
+.services-grid{margin-top:3rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1rem}
+.svc-card{
+  background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:2rem;
+  transition:all .25s;position:relative;overflow:hidden;display:flex;flex-direction:column;
+}
+.svc-card.hot{border-color:rgba(192,132,252,0.35);background:linear-gradient(145deg,rgba(192,132,252,0.07),rgba(244,114,182,0.04))}
+.svc-card:hover{transform:translateY(-3px);border-color:rgba(192,132,252,0.3)}
+.hot-badge{
+  position:absolute;top:1rem;right:1rem;font-size:.6rem;font-weight:700;letter-spacing:.08em;
+  padding:.2rem .6rem;border-radius:100px;text-transform:uppercase;
+  background:linear-gradient(135deg,var(--accent1),var(--accent2));color:#07080F;
+}
+.svc-ic{font-size:1.8rem;margin-bottom:1rem}
+.svc-nm{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;margin-bottom:.4rem}
+.svc-desc{font-size:.82rem;color:var(--muted);line-height:1.65;margin-bottom:1.25rem;flex:1}
+.svc-includes{display:flex;flex-direction:column;gap:.3rem;margin-bottom:1.4rem}
+.svc-inc{font-size:.75rem;color:var(--muted);display:flex;align-items:center;gap:.45rem}
+.svc-inc::before{content:"✓";color:var(--green);font-weight:700;font-size:.72rem}
+.svc-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.4rem;
+  font-weight:700;font-size:.76rem;padding:.55rem 1rem;border-radius:8px;
+  text-decoration:none;letter-spacing:.04em;text-transform:uppercase;transition:all .2s;
+  margin-top:auto;
+}
+.svc-btn-grad{background:linear-gradient(135deg,var(--accent1),var(--accent2));color:#07080F}
+.svc-btn-grad:hover{opacity:.88}
+.svc-btn-outline{background:rgba(192,132,252,0.08);border:1px solid rgba(192,132,252,0.25);color:var(--accent1)}
+.svc-btn-outline:hover{background:rgba(192,132,252,0.14)}
+
+/* PROCESS */
+.process-steps{margin-top:3rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:18px;overflow:hidden}
+.step{background:var(--bg2);padding:1.75rem;transition:background .2s}
+.step:hover{background:var(--bg3)}
+.step-num{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--accent1);font-weight:500;letter-spacing:.1em;margin-bottom:.85rem}
+.step-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;margin-bottom:.4rem}
+.step-desc{font-size:.78rem;color:var(--muted);line-height:1.6}
+
+/* TESTIMONIALS */
+.testimonials-grid{margin-top:3rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem}
+.testi-card{
+  background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:1.75rem;
+  transition:border-color .2s;
+}
+.testi-card:hover{border-color:rgba(192,132,252,0.25)}
+.testi-stars{color:#EAB308;font-size:.85rem;margin-bottom:1rem;letter-spacing:.1em}
+.testi-text{font-size:.85rem;color:var(--muted);line-height:1.7;margin-bottom:1.25rem;font-style:italic}
+.testi-author{display:flex;align-items:center;gap:.75rem}
+.testi-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.testi-name{font-weight:600;font-size:.82rem}
+.testi-role{font-size:.72rem;color:var(--muted)}
+.testi-note{
+  display:inline-flex;align-items:center;gap:.5rem;margin-top:2rem;
+  background:rgba(234,179,8,0.08);border:1px solid rgba(234,179,8,0.2);
+  color:#EAB308;font-size:.72rem;font-weight:600;padding:.35rem 1rem;border-radius:100px;
+}
+
+/* CONTACT */
+.contact-box{
+  margin-top:3rem;background:var(--bg2);border:1px solid var(--border);
+  border-radius:22px;overflow:hidden;
+}
+.contact-top{
+  padding:3.5rem;text-align:center;position:relative;
+  background:linear-gradient(145deg,rgba(192,132,252,0.06),rgba(244,114,182,0.03));
+}
+.contact-top::before{
+  content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);
+  width:500px;height:300px;
+  background:radial-gradient(ellipse,rgba(192,132,252,0.1) 0%,transparent 65%);pointer-events:none;
+}
+.contact-h{font-family:'Syne',sans-serif;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;letter-spacing:-0.02em;margin-bottom:.6rem}
+.contact-sub{color:var(--muted);font-size:.88rem;margin-bottom:.5rem;max-width:400px;margin-left:auto;margin-right:auto;line-height:1.7}
+.contact-urgent{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.2);
+  color:var(--green);font-size:.72rem;font-weight:600;
+  padding:.3rem .85rem;border-radius:100px;margin-bottom:2rem;
+}
+.contact-chips{display:flex;justify-content:center;gap:.65rem;flex-wrap:wrap}
+.chip{
+  display:inline-flex;align-items:center;gap:.55rem;
+  background:var(--bg3);border:1px solid var(--border);
+  color:var(--text);text-decoration:none;
+  padding:.65rem 1.3rem;border-radius:10px;font-weight:500;font-size:.82rem;
+  transition:all .2s;
+}
+.chip:hover{border-color:rgba(192,132,252,0.35);background:rgba(192,132,252,0.07);color:var(--accent1)}
+.contact-bottom{
+  padding:1.5rem 3.5rem;
+  border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+}
+.contact-bottom-text{font-size:.78rem;color:var(--muted)}
+.contact-bottom-text strong{color:var(--green)}
+
+footer{text-align:center;padding:2rem 3rem;color:var(--muted);font-size:.72rem;border-top:1px solid var(--border)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* MOBILE */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;padding:7rem 1.5rem 4rem}
+  .hero-photo-wrap{display:none}
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  .section{padding:4.5rem 1.5rem}
+  .divider-line{margin:0 1.5rem}
+  .contact-top{padding:2.5rem 1.5rem}
+  .contact-bottom{padding:1.25rem 1.5rem;flex-direction:column;text-align:center}
+  .trust-bar{padding:1.25rem 1.5rem}
+  .trust-sep{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">SRI.DEV</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Hire Me →</a>
+</nav>
+
+<!-- HERO -->
+<div style="position:relative;z-index:1">
+<div class="hero">
+
+  <!-- LEFT -->
+  <div class="hero-left">
+    <div class="hero-available"><div class="dot"></div> Open to freelance projects</div>
+    <p class="hero-greeting">// Hello, I'm <span>Srilakshmi</span></p>
+    <h1>
+      Data that drives<br>
+      <span class="line2">smart decisions.</span>
+    </h1>
+    <div class="hero-role">
+      <div class="role-bar"></div>
+      Data Analyst · Python Developer
+    </div>
+    <p class="hero-bio">
+      I help <strong>businesses, brands & agencies</strong> turn messy spreadsheets
+      into clear insights — through clean Python analysis, sharp charts,
+      and reports your team can act on immediately.
+    </p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-grad">See My Work →</a>
+      <a href="#contact" class="btn-ghost">Let's Talk</a>
+    </div>
+    <div class="hero-metrics">
+      <div>
+        <div class="metric-num">3+</div>
+        <div class="metric-label">Live Projects</div>
+      </div>
+      <div>
+        <div class="metric-num">20K+</div>
+        <div class="metric-label">Rows Analyzed</div>
+      </div>
+      <div>
+        <div class="metric-num">2hr</div>
+        <div class="metric-label">Avg Reply Time</div>
+      </div>
+      <div>
+        <div class="metric-num">100%</div>
+        <div class="metric-label">On-time Delivery</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT — PHOTO CARD -->
+  <div class="hero-photo-wrap">
+    <div class="photo-card">
+      <div class="photo-img-wrap">
+          <img src="C:\Users\srila\Downloads\ChatGPT Image Jun 27, 2026, 11_46_35 PM.png" alt="Srilakshmi">
+        <div class="photo-placeholder">
+          <span>👩‍💻</span>
+          <p>Replace with<br>your photo</p>
+        </div>
+      </div>
+      <div class="photo-name">G. V. Srilakshmi</div>
+      <div class="photo-title">Data Analyst & Python Developer</div>
+      <div class="photo-tags">
+        <span class="photo-tag" style="background:rgba(192,132,252,0.12);color:#C084FC">Python</span>
+        <span class="photo-tag" style="background:rgba(56,189,248,0.12);color:#38BDF8">Pandas</span>
+        <span class="photo-tag" style="background:rgba(244,114,182,0.12);color:#F472B6">EDA</span>
+        <span class="photo-tag" style="background:rgba(74,222,128,0.12);color:#4ADE80">Open to Work</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust-bar" style="position:relative;z-index:1">
+  <div class="trust-inner">
+    <div class="trust-item"><span class="trust-icon">🐍</span> Python</div>
+    <div class="trust-sep"></div>
+    <div class="trust-item"><span class="trust-icon">🐼</span> Pandas</div>
+    <div class="trust-sep"></div>
+    <div class="trust-item"><span class="trust-icon">📊</span> Matplotlib</div>
+    <div class="trust-sep"></div>
+    <div class="trust-item"><span class="trust-icon">🎨</span> Seaborn</div>
+    <div class="trust-sep"></div>
+    <div class="trust-item"><span class="trust-icon">🔢</span> NumPy</div>
+    <div class="trust-sep"></div>
+    <div class="trust-item"><span class="trust-icon">🐙</span> GitHub</div>
+    <div class="trust-sep"></div>
+    <div class="trust-item"><span class="trust-icon">💻</span> VS Code</div>
+  </div>
+</div>
+
+<hr class="divider-line">
+
+<!-- SKILLS -->
+<div style="position:relative;z-index:1">
+<div class="section reveal" id="skills">
+  <div class="eyebrow">// What I work with</div>
+  <h2 class="section-h">Skills & Tools</h2>
+  <p class="section-sub">Everything I use to go from a raw CSV file to a boardroom-ready insight report.</p>
+  <div class="skills-wrap">
+    <div class="skill-pill">
+      <span class="skill-ic">🐍</span>
+      <div class="skill-nm">Python</div><div class="skill-tg">Core language</div>
+      <div class="skill-track"><div class="skill-fill" style="width:88%;background:linear-gradient(90deg,#C084FC,#A855F7)"></div></div>
+    </div>
+    <div class="skill-pill">
+      <span class="skill-ic">🐼</span>
+      <div class="skill-nm">Pandas</div><div class="skill-tg">Data wrangling</div>
+      <div class="skill-track"><div class="skill-fill" style="width:82%;background:linear-gradient(90deg,#38BDF8,#0EA5E9)"></div></div>
+    </div>
+    <div class="skill-pill">
+      <span class="skill-ic">📊</span>
+      <div class="skill-nm">Matplotlib</div><div class="skill-tg">Visualization</div>
+      <div class="skill-track"><div class="skill-fill" style="width:80%;background:linear-gradient(90deg,#FB923C,#F97316)"></div></div>
+    </div>
+    <div class="skill-pill">
+      <span class="skill-ic">🎨</span>
+      <div class="skill-nm">Seaborn</div><div class="skill-tg">Styled charts</div>
+      <div class="skill-track"><div class="skill-fill" style="width:78%;background:linear-gradient(90deg,#F472B6,#EC4899)"></div></div>
+    </div>
+    <div class="skill-pill">
+      <span class="skill-ic">🔢</span>
+      <div class="skill-nm">NumPy</div><div class="skill-tg">Numerical ops</div>
+      <div class="skill-track"><div class="skill-fill" style="width:75%;background:linear-gradient(90deg,#4ADE80,#22C55E)"></div></div>
+    </div>
+    <div class="skill-pill">
+      <span class="skill-ic">🔍</span>
+      <div class="skill-nm">EDA</div><div class="skill-tg">Pattern finding</div>
+      <div class="skill-track"><div class="skill-fill" style="width:85%;background:linear-gradient(90deg,#C084FC,#F472B6)"></div></div>
+    </div>
+    <div class="skill-pill">
+      <span class="skill-ic">🐙</span>
+      <div class="skill-nm">Git & GitHub</div><div class="skill-tg">Version control</div>
+      <div class="skill-track"><div class="skill-fill" style="width:72%;background:linear-gradient(90deg,#38BDF8,#C084FC)"></div></div>
+    </div>
+    <div class="skill-pill">
+      <span class="skill-ic">📓</span>
+      <div class="skill-nm">Jupyter / VS Code</div><div class="skill-tg">Development</div>
+      <div class="skill-track"><div class="skill-fill" style="width:90%;background:linear-gradient(90deg,#38BDF8,#0EA5E9)"></div></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<hr class="divider-line">
+
+<!-- PROJECTS -->
+<div style="position:relative;z-index:1">
+<div class="section reveal" id="projects">
+  <div class="eyebrow">// What I've built</div>
+  <h2 class="section-h">Projects</h2>
+  <p class="section-sub">Real datasets. Real analysis. Insights that businesses can act on immediately.</p>
+
+  <div class="projects-grid">
+
+    <!-- Netflix -->
+    <div class="proj-card">
+      <div class="proj-screenshot">
+        <!--
+          ADD YOUR SCREENSHOT:
+          <img src="charts/netflix-preview.png" alt="Netflix Analysis">
+          Until then:
+        -->
+        <div class="proj-screenshot-placeholder">
+          <span class="big">🎬</span>
+          <p>Add charts/netflix-preview.png<br>to show your actual chart here</p>
+        </div>
+        <div class="proj-screenshot-label">EDA · 8,000+ rows</div>
+      </div>
+      <div class="proj-top">
+        <div class="proj-ic" style="background:rgba(229,9,20,0.12)">🎬</div>
+        <a href="https://github.com/YOURUSERNAME/netflix-eda" class="proj-arrow" target="_blank">↗</a>
+      </div>
+      <div class="proj-body">
+        <div class="proj-title">Netflix Content Analysis</div>
+        <div class="proj-desc">Deep dive into 8,000+ Netflix titles — content trends, genre dominance, and platform growth across 190+ countries.</div>
+        <div class="proj-findings">
+          <div class="finding">70% Movies vs 30% TV Shows on the platform</div>
+          <div class="finding">USA, India & UK are top 3 content producers</div>
+          <div class="finding">2018–2020 saw Netflix's biggest content surge</div>
+        </div>
+        <div class="proj-tags">
+          <span class="ptag" style="background:rgba(192,132,252,0.12);color:#C084FC">Python</span>
+          <span class="ptag" style="background:rgba(56,189,248,0.12);color:#38BDF8">Pandas</span>
+          <span class="ptag" style="background:rgba(251,146,60,0.12);color:#FB923C">Matplotlib</span>
+          <span class="ptag" style="background:rgba(244,114,182,0.12);color:#F472B6">EDA</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Instagram -->
+    <div class="proj-card">
+      <div class="proj-screenshot">
+        <div class="proj-screenshot-placeholder">
+          <span class="big">📱</span>
+          <p>Add charts/instagram-preview.png<br>to show your actual chart here</p>
+        </div>
+        <div class="proj-screenshot-label">Marketing · Engagement</div>
+      </div>
+      <div class="proj-top">
+        <div class="proj-ic" style="background:rgba(244,114,182,0.12)">📱</div>
+        <a href="https://github.com/YOURUSERNAME/instagram-analysis" class="proj-arrow" target="_blank">↗</a>
+      </div>
+      <div class="proj-body">
+        <div class="proj-title">Instagram Engagement Analysis</div>
+        <div class="proj-desc">Analyzed what drives reach, likes, saves and growth — giving brands a clear data-backed content strategy.</div>
+        <div class="proj-findings">
+          <div class="finding">Hashtags drive 27%+ of total impressions</div>
+          <div class="finding">Saves correlate strongest with algorithmic reach</div>
+          <div class="finding">Engagement rate benchmarked vs industry average</div>
+        </div>
+        <div class="proj-tags">
+          <span class="ptag" style="background:rgba(192,132,252,0.12);color:#C084FC">Python</span>
+          <span class="ptag" style="background:rgba(244,114,182,0.12);color:#F472B6">Seaborn</span>
+          <span class="ptag" style="background:rgba(74,222,128,0.12);color:#4ADE80">WordCloud</span>
+          <span class="ptag" style="background:rgba(56,189,248,0.12);color:#38BDF8">Marketing</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Superstore -->
+    <div class="proj-card">
+      <div class="proj-screenshot">
+        <div class="proj-screenshot-placeholder">
+          <span class="big">📦</span>
+          <p>Add charts/superstore-preview.png<br>to show your actual chart here</p>
+        </div>
+        <div class="proj-screenshot-label">Sales · Business Intel</div>
+      </div>
+      <div class="proj-top">
+        <div class="proj-ic" style="background:rgba(251,146,60,0.12)">📦</div>
+        <a href="https://github.com/YOURUSERNAME/superstore-analysis" class="proj-arrow" target="_blank">↗</a>
+      </div>
+      <div class="proj-body">
+        <div class="proj-title">Superstore Sales Analysis</div>
+        <div class="proj-desc">4 years of US retail data analyzed to reveal top products, regional trends, and year-over-year growth patterns.</div>
+        <div class="proj-findings">
+          <div class="finding">Technology leads all categories in revenue</div>
+          <div class="finding">West region outperforms all others in sales</div>
+          <div class="finding">Consumer segment is the #1 buyer group</div>
+        </div>
+        <div class="proj-tags">
+          <span class="ptag" style="background:rgba(192,132,252,0.12);color:#C084FC">Python</span>
+          <span class="ptag" style="background:rgba(56,189,248,0.12);color:#38BDF8">Pandas</span>
+          <span class="ptag" style="background:rgba(251,146,60,0.12);color:#FB923C">Business Intel</span>
+          <span class="ptag" style="background:rgba(234,179,8,0.12);color:#EAB308">Sales</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<hr class="divider-line">
+
+<!-- SERVICES -->
+<div style="position:relative;z-index:1">
+<div class="section reveal" id="services">
+  <div class="eyebrow">// What I offer</div>
+  <h2 class="section-h">Freelance Services</h2>
+  <p class="section-sub">Clear deliverables, real insights, fast turnaround — for businesses that want data to actually work for them.</p>
+  <div class="services-grid">
+    <div class="svc-card hot">
+      <div class="hot-badge">Most Popular</div>
+      <div class="svc-ic">📱</div>
+      <div class="svc-nm">Social Media Analysis</div>
+      <div class="svc-desc">Full engagement analysis of your Instagram data — what content works, best posting patterns, and a clear action plan to grow faster.</div>
+      <div class="svc-includes">
+        <div class="svc-inc">Engagement rate report</div>
+        <div class="svc-inc">6+ visual charts</div>
+        <div class="svc-inc">Actionable recommendations</div>
+        <div class="svc-inc">2-day delivery</div>
+      </div>
+      <a href="#contact" class="svc-btn svc-btn-grad">Get a Quote →</a>
+    </div>
+    <div class="svc-card">
+      <div class="svc-ic">📊</div>
+      <div class="svc-nm">Sales Data Analysis</div>
+      <div class="svc-desc">Turn your sales CSV into a clear picture of top products, regions, and growth — with charts your team can present to stakeholders.</div>
+      <div class="svc-includes">
+        <div class="svc-inc">Full EDA report</div>
+        <div class="svc-inc">8+ visual charts</div>
+        <div class="svc-inc">Business insights summary</div>
+        <div class="svc-inc">3-day delivery</div>
+      </div>
+      <a href="#contact" class="svc-btn svc-btn-outline">Get a Quote →</a>
+    </div>
+    <div class="svc-card">
+      <div class="svc-ic">🎯</div>
+      <div class="svc-nm">Custom Data Report</div>
+      <div class="svc-desc">Any CSV, any domain. I clean it, analyze it, and deliver a polished report with insights ready to share — fast.</div>
+      <div class="svc-includes">
+        <div class="svc-inc">Data cleaning included</div>
+        <div class="svc-inc">Custom charts & visuals</div>
+        <div class="svc-inc">Executive summary</div>
+        <div class="svc-inc">Unlimited revisions</div>
+      </div>
+      <a href="#contact" class="svc-btn svc-btn-outline">Get a Quote →</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<hr class="divider-line">
+
+<!-- PROCESS -->
+<div style="position:relative;z-index:1">
+<div class="section reveal">
+  <div class="eyebrow">// How I work</div>
+  <h2 class="section-h">My Process</h2>
+  <p class="section-sub">Simple, transparent, and always focused on results you can actually use.</p>
+  <div class="process-steps">
+    <div class="step">
+      <div class="step-num">STEP 01</div>
+      <div class="step-title">You Share Your Data</div>
+      <div class="step-desc">Send me your CSV or Excel file. I'll review it and confirm what's possible within 24 hours.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">STEP 02</div>
+      <div class="step-title">I Clean & Analyze</div>
+      <div class="step-desc">I handle messy data, missing values, and inconsistencies — then run a full analysis to find what matters.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">STEP 03</div>
+      <div class="step-title">Charts & Visuals</div>
+      <div class="step-desc">Every insight gets a clear, professional chart your team can understand and present — no jargon.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">STEP 04</div>
+      <div class="step-title">You Get the Report</div>
+      <div class="step-desc">Final delivery: charts, insights summary, and recommendations — all in a shareable format, on time.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<hr class="divider-line">
+
+<!-- TESTIMONIALS 
+<div style="position:relative;z-index:1">
+<div class="section reveal">
+  <div class="eyebrow">// What clients say</div>
+  <h2 class="section-h">Testimonials</h2>
+  <p class="section-sub">Just starting out — these spots are reserved for my first clients. Be one of them.</p>
+
+  <div class="testimonials-grid">
+    <div class="testi-card" style="opacity:.5;border-style:dashed">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"Your testimonial will appear here after we work together. Be my first client and share your experience!"</div>
+      <div class="testi-author">
+        <div class="testi-avatar">?</div>
+        <div>
+          <div class="testi-name">Your Name Here</div>
+          <div class="testi-role">Future Client</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card" style="opacity:.5;border-style:dashed">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"Another happy client's feedback will appear here. Early clients get my best prices and fastest delivery."</div>
+      <div class="testi-author">
+        <div class="testi-avatar">?</div>
+        <div>
+          <div class="testi-name">Your Name Here</div>
+          <div class="testi-role">Future Client</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card" style="opacity:.5;border-style:dashed">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"Reach out today — early clients get priority attention, best pricing, and a chance to shape my services."</div>
+      <div class="testi-author">
+        <div class="testi-avatar">?</div>
+        <div>
+          <div class="testi-name">Your Name Here</div>
+          <div class="testi-role">Future Client</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:1.5rem">
+    <div class="testi-note">⚡ Early client spots open — message me today for best pricing</div>
+  </div>
+</div>
+</div>
+
+<hr class="divider-line">  -->
+
+<!-- CONTACT -->
+<div style="position:relative;z-index:1">
+<div class="section reveal" id="contact">
+  <div class="eyebrow">// Let's work together</div>
+  <h2 class="section-h">Get in Touch</h2>
+  <div class="contact-box">
+    <div class="contact-top">
+      <div class="contact-h">Ready to make your data work for you?</div>
+      <p class="contact-sub">Send me your dataset today and I'll tell you exactly what insights I can find — no commitment needed.</p>
+      <div class="contact-urgent">⚡ I reply within 2 hours · Fast delivery guaranteed</div>
+      <div class="contact-chips">
+        <a href="mailto:srilakshmigopavarapu@email.com" class="chip">✉️ srilakshmigopavarapu@email.com</a>
+        <a href="https://linkedin.com/in/" class="chip" target="_blank">💼 LinkedIn</a>
+        <a href="https://github.com/Srilakshmi-171" class="chip" target="_blank">🐙 GitHub</a>
+      </div>
+    </div>
+    <div class="contact-bottom">
+      <div class="contact-bottom-text">Currently available · <strong>Responding fast</strong> · Open to short & long term projects</div>
+      <a href="mailto:srilakshmigopavarapu@email.com" class="btn-grad" style="font-size:.8rem;padding:.6rem 1.4rem">Send Me a Message →</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<footer>
+  <p>Designed & built by <strong style="color:var(--accent1)">G. V. Srilakshmi</strong> · Data Analyst · Hosted on GitHub Pages · © 2024</p>
+</footer>
+
+<script>
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') });
+}, {threshold:0.08});
+reveals.forEach(r => io.observe(r));
+
+// Smooth scroll all anchors
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    e.preventDefault();
+    const t = document.querySelector(this.getAttribute('href'));
+    if(t) window.scrollTo({top: t.getBoundingClientRect().top + window.scrollY - 80, behavior:'smooth'});
+  });
+});
+
+// Stagger skill pills
+document.querySelectorAll('.skill-pill').forEach((el,i) => el.style.transitionDelay = `${i*0.05}s`);
+</script>
+</body>
+</html>
